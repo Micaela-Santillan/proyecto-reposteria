@@ -253,6 +253,10 @@ function toggleFavorito(id) {
 
 
 // ============ NOTIFICACIONES Y MODO OSCURO ============
+function escaparHTML (texto){
+  const div= document.createElement("div");
+  div.textContent=texto;
+  return div.innerHTML;} 
 
 function mostrarToast(mensaje, tipo = "exito") {
   const el = document.createElement("div");
@@ -359,7 +363,7 @@ formCheckout.addEventListener("submit", (e) => {
   formCheckout.classList.remove("was-validated");
   campoDireccion.style.display = "none";
 
-  mostrarToast(`¡Gracias ${nombre}! Tu pedido de Dulce Tentación fue confirmado.`);
+  mostrarToast(`¡Gracias ${escaparHTML(nombre)}! Tu pedido de Dulce Tentación fue confirmado.`);
 });
 
 

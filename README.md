@@ -10,8 +10,8 @@ El proyecto ofrece una identidad propia ("Dulce Tentación"), orientada a la ven
 
 ##  Funcionalidades Principales
 
-- **Catálogo Dinámico:** Generación automática de tarjetas de productos a partir de un array de objetos utilizando `map()` y template strings.
-- **Filtros y Búsqueda:** Filtrado de productos por categoría y selección rápida de productos favoritos.
+- **Catálogo Dinamico:** Generación automática de tarjetas de productos a partir de un array de objetos utilizando `map()` y template strings.
+- **Filtros:** Filtrado de productos por categoria y seleccion rapida de productos favoritos
 - **Gestión de Carrito:** 
   - Agregar productos, aumentar/disminuir cantidades y eliminar ítems individuales o vaciar el carrito completo.
   - Control para evitar duplicados (incrementa la cantidad si el producto ya fue añadido).

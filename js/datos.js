@@ -49,7 +49,7 @@ const productos = [
   {
     id: 6,
     nombre: "Tarta de Frutillas",
-    categoria: "Tarta",
+    categoria: "Tartas",
     precio: 12000,
     descripcion: "Masa sablee clasica, con relleno de crema de leche, y frutillas naturales.",
     imagen: "img/tarta_frutilla.jpeg",
@@ -58,7 +58,7 @@ const productos = [
   {
     id: 7,
     nombre: "Tarta Oreo",
-    categoria: "Tarta",
+    categoria: "Tartas",
     precio: 15000,
     descripcion: "Masa con galletas trituradas, con relleno de crema de leche, y oreos minis.",
     imagen: "img/tarta_oreo.jpeg",
