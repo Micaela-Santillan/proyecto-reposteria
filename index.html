@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Tentación | Repostería Artesanal</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Tipografías: Cormorant Garamond (títulos) + DM Sans (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand brand-acento" href="#">
+        <span class="brand-nombre"><i class="bi bi-cake2-fill"></i> Dulce Tentación</span>
+        <small class="brand-lema">Repostería artesanal</small>
+      </a>
+
+      <div class="menu-principal d-none d-md-flex">
+        <a href="#" class="activo">Inicio</a>
+        <a href="#catalogo">Menú</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <!-- Botón de Tema Oscuro/Claro -->
+        <button id="btnTema" class="btn btn-icono rounded-circle" title="Cambiar tema" aria-label="Cambiar tema">
+          <i class="bi bi-moon-stars"></i>
+        </button>
+        <!-- Botón de Favoritos con badge -->
+        <button id="btnFavoritos" class="btn btn-icono position-relative" title="Ver favoritos" aria-label="Ver favoritos">
+          <i class="bi bi-heart-fill text-danger"></i>
+          <span id="contadorFavoritos" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+        </button>
+        <!-- Botón de Carrito Offcanvas con badge -->
+        <button class="btn btn-reposteria position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#carritoOffcanvas" aria-controls="carritoOffcanvas">
+          <i class="bi bi-bag-fill"></i> Pedido
+          <span id="contadorCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark d-none">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO HEADER ============ -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-contenido">
+        <p class="eyebrow">Pastelería artesanal</p>
+        <h1 class="hero-titulo">Felicidad recién horneada</h1>
+        <p class="hero-texto">Endulzá tus momentos con productos frescos, caseros y elaborados con amor.</p>
+        <a href="#catalogo" class="btn btn-reposteria btn-hero">Ver el menú <i class="bi bi-arrow-right ms-1"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ BENEFICIOS ============ -->
+  <section class="beneficios">
+    <div class="container">
+      <div class="row g-4 text-center">
+        <div class="col-6 col-md-3 beneficio">
+          <span class="beneficio-icono"><i class="bi bi-cake2"></i></span>
+          <h2 class="beneficio-titulo">Ingredientes frescos</h2>
+          <p>Solo lo mejor, siempre.</p>
+        </div>
+        <div class="col-6 col-md-3 beneficio">
+          <span class="beneficio-icono"><i class="bi bi-truck"></i></span>
+          <h2 class="beneficio-titulo">Envío a domicilio</h2>
+          <p>Tus dulces, a tiempo.</p>
+        </div>
+        <div class="col-6 col-md-3 beneficio">
+          <span class="beneficio-icono"><i class="bi bi-heart"></i></span>
+          <h2 class="beneficio-titulo">Hecho con amor</h2>
+          <p>Porque te lo merecés.</p>
+        </div>
+        <div class="col-6 col-md-3 beneficio">
+          <span class="beneficio-icono"><i class="bi bi-gift"></i></span>
+          <h2 class="beneficio-titulo">Para cada ocasión</h2>
+          <p>Para tus momentos especiales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENIDO PRINCIPAL / CATÁLOGO ============ -->
+  <main id="catalogo" class="container my-5">
+
+    <div class="encabezado-seccion mb-4">
+      <p class="eyebrow-seccion mb-1">Lo más pedido</p>
+      <h2 class="titulo-seccion mb-0">Nuestros productos</h2>
+    </div>
+
+    <!-- Filtros -->
+    <div class="barra-filtros row mb-4 mx-0 g-3 align-items-center">
+      <div class="col-md-5">
+        <label for="filtroCategoria" class="form-label fw-semibold small mb-1">Categoría</label>
+        <select id="filtroCategoria" class="form-select">
+          <option value="">Todas las categorías</option>
+        </select>
+      </div>
+      <div class="col-md-5 d-flex align-items-end">
+        <div class="form-check form-switch mb-1">
+          <input class="form-check-input" type="checkbox" role="switch" id="soloFavoritos">
+          <label class="form-check-label fw-semibold small" for="soloFavoritos">Mostrar solo favoritos ❤️</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor dinámico de Productos (Generado con JS) -->
+    <div id="contenedorProductos" class="row g-4">
+      <!-- Las cards se inyectan aquí automáticamente -->
+    </div>
+
+    <!-- Mensaje si no hay resultados -->
+    <div id="sinResultados" class="text-center py-5 d-none">
+      <i class="bi bi-search fs-1 text-muted"></i>
+      <p class="text-muted mt-2">No se encontraron productos con los filtros seleccionados.</p>
+    </div>
+  </main>
+
+  <!-- ============ OFFCANVAS DE CARRITO / PEDIDO ============ -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoOffcanvas" aria-labelledby="carritoOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="carritoOffcanvasLabel">
+        <i class="bi bi-bag"></i> Tu pedido dulce
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+      <!-- Lista de ítems en el carrito -->
+      <div id="listaCarrito" class="flex-grow-1 overflow-auto">
+        <!-- Los ítems del carrito se inyectan aquí -->
+      </div>
+
+      <!-- Resumen y botones de acción del carrito -->
+      <div class="resumen-carrito pt-3 mt-3">
+        <div class="d-flex justify-content-between mb-3 fs-5 fw-bold">
+          <span>Total</span>
+          <span id="totalCarrito" class="text-reposteria">$0</span>
+        </div>
+        <div class="d-grid gap-2">
+          <button id="btnFinalizar" class="btn btn-reposteria btn-lg">Finalizar pedido</button>
+          <button id="btnVaciar" class="btn btn-outline-danger btn-sm">Vaciar carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MODAL DE CHECKOUT / FORMULARIO ============ -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content modal-checkout-custom border-0 shadow-lg">
+      
+      <!-- Encabezado con degradado suave -->
+      <div class="modal-header header-checkout border-0 pb-0">
+        <div class="d-flex align-items-center gap-2">
+          <div class="icon-checkout-box rounded-circle">
+            <i class="bi bi-bag-check-fill"></i>
+          </div>
+          <div>
+            <h5 class="modal-title fw-bold mb-0" id="checkoutModalLabel">Finalizar Pedido</h5>
+            <small class="text-muted">Completá los datos para coordinar la entrega</small>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        <form id="formCheckout" novalidate>
+          <div class="row g-4">
+            
+            <!-- Columna Izquierda: Datos personales -->
+            <div class="col-md-6">
+              <h6 class="form-seccion-titulo"><i class="bi bi-person-heart me-1"></i> Datos Personales</h6>
+              
+              <div class="mb-3">
+                <label for="inputNombre" class="form-label small fw-semibold">Nombre y Apellido</label>
+                <div class="input-group">
+                  <span class="input-group-text custom-input-icon"><i class="bi bi-person"></i></span>
+                  <input type="text" class="form-control input-custom" id="inputNombre" placeholder="Ej: María García" required>
+                  <div class="invalid-feedback">Por favor ingresá tu nombre.</div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="inputTelefono" class="form-label small fw-semibold">Teléfono / WhatsApp</label>
+                <div class="input-group">
+                  <span class="input-group-text custom-input-icon"><i class="bi bi-whatsapp"></i></span>
+                  <input type="tel" class="form-control input-custom" id="inputTelefono" placeholder="Ej: 3865221193" required>
+                  <div class="invalid-feedback">Por favor ingresá un teléfono válido.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Método de Entrega -->
+            <div class="col-md-6">
+              <h6 class="form-seccion-titulo"><i class="bi bi-geo-alt-fill me-1"></i> Formato de Entrega</h6>
+              
+              <!-- Opciones de tarjeta tipo Radio -->
+              <div class="opciones-entrega d-grid gap-2 mb-3">
+                
+                <label class="tarjeta-opcion d-flex align-items-center p-3 rounded border">
+                  <input class="form-check-input me-3" type="radio" name="entrega" id="entregaRetiro" value="retiro" checked>
+                  <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-shop fs-4 text-reposteria"></i>
+                    <div>
+                      <strong class="d-block">Retiro en local</strong>
+                      <small class="text-muted d-block fs-xs">Calle Venezuela 560, Juan B. Alberdi</small>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="tarjeta-opcion d-flex align-items-center p-3 rounded border">
+                  <input class="form-check-input me-3" type="radio" name="entrega" id="entregaDomicilio" value="domicilio">
+                  <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-truck fs-4 text-reposteria"></i>
+                    <div>
+                      <strong class="d-block">Envío a domicilio</strong>
+                      <small class="text-muted d-block fs-xs">Lo llevamos hasta tu puerta</small>
+                    </div>
+                  </div>
+                </label>
+
+              </div>
+
+              <!-- Campo de Dirección Animado/Desplegable -->
+              <div class="mb-3" id="campoDireccion" style="display: none;">
+                <label for="inputDireccion" class="form-label small fw-semibold">Dirección de entrega</label>
+                <div class="input-group">
+                  <span class="input-group-text custom-input-icon"><i class="bi bi-house-door"></i></span>
+                  <input type="text" class="form-control input-custom" id="inputDireccion" placeholder="Calle, número, barrio...">
+                  <div class="invalid-feedback">Por favor ingresá tu dirección.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <hr class="my-4 opacity-10">
+
+          <!-- Botón de acción principal -->
+          <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-reposteria btn-lg px-4 fs-6 fw-bold">
+              <i class="bi bi-whatsapp me-2"></i> Confirmar y enviar pedido
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  <!-- ============ CONTENEDOR DE TOASTS (Notificaciones) ============ -->
+  <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="contacto" class="text-center py-4 small">
+    <div class="container">
+      <p class="mb-0">Telefono: 3865 - 221193</p>
+        <p class="mb-0">Instagram: Algodulce.ok.</p>
+        <p class="mb-0"> Direccion: Barrio 12 de octubre, calle Venezuela 560 - Juan B. Alberdi
+        </p>
+        
+
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Archivos del proyecto (datos.js primero) -->
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

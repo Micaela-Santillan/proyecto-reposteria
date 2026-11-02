@@ -1,0 +1,438 @@
+:root {
+  --fuente-titulo: "Cormorant Garamond", Georgia, serif;
+  --fuente-texto: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------- Tema claro ---------- */
+html[data-bs-theme="light"] {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #2a211e;
+  --bs-secondary-color: #7b6a64;
+  --bs-border-color: #efe3dd;
+  --bs-tertiary-bg: #fbf3ee;
+  --superficie: #fdf6f2;
+  --durazno: #f6e3db;
+  --durazno-hover: #efd2c7;
+  --tinta: #1f1a17;
+  --tinta-texto: #ffffff;
+  --rosa: #a1544d;
+  --hero-vela: rgba(248, 230, 221, 0.94);
+  --hero-fondo: linear-gradient(135deg, #f9e9e0, #f1d5c9);
+}
+
+/* ---------- Tema oscuro ---------- */
+html[data-bs-theme="dark"] {
+  --bs-body-bg: #1b1513;
+  --bs-body-color: #f3e6e0;
+  --bs-secondary-color: #c3aaa2;
+  --bs-border-color: #ffbca1;
+  --bs-tertiary-bg: #241b18;
+  --superficie: #2b201c;
+  --durazno: #3b2a24;
+  --durazno-hover: #4a342cc0;
+  --tinta: #f3e6e0;
+  --tinta-texto: #1b1513;
+  --rosa: #eba79d;
+  --hero-vela: rgba(36, 27, 24, 0.94);
+  --hero-fondo: linear-gradient(135deg, #2c201c, #3a2a24);
+}
+
+
+body {
+  font-family: var(--fuente-texto);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, .navbar-brand, .offcanvas-title, .modal-title {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+}
+
+:focus-visible {
+  outline: 3px solid var(--rosa);
+  outline-offset: 2px;
+}
+
+
+
+/* ---------- Botones ---------- */
+.btn { font-family: var(--fuente-texto); }
+
+.btn-reposteria {
+  background-color: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--tinta-texto);
+  font-weight: 500;
+  border-radius: 999px;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+.btn-reposteria:hover,
+.btn-reposteria:focus-visible,
+.btn-reposteria:active {
+  background-color: var(--rosa);
+  border-color: var(--rosa);
+  color: #ffffff;
+}
+
+.btn-icono {
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-body-color);
+  background: transparent;
+  border-radius: 999px;
+  min-width: 2.4rem;
+  min-height: 2.4rem;
+}
+.btn-icono:hover {
+  background: var(--bs-tertiary-bg);
+  color: var(--bs-body-color);
+  border-color: var(--rosa);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  background-color: var(--bs-body-bg);
+  border-bottom: 1px solid var(--bs-border-color);
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+.navbar-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  color: var(--bs-body-color);
+  margin: 0;
+}
+.brand-nombre { font-size: 1.6rem; }
+.brand-nombre i { color: var(--rosa); font-size: 1.1rem; }
+.brand-lema {
+  font-family: var(--fuente-texto);
+  font-size: 0.68rem;
+  color: var(--bs-secondary-color);
+  letter-spacing: 0.04em;
+}
+.menu-principal { gap: 2rem; }
+.menu-principal a {
+  color: var(--bs-body-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+}
+.menu-principal a:hover,
+.menu-principal a.activo { border-bottom-color: var(--rosa); }
+
+/* ---------- Hero ---------- */
+/* Si agregás una foto en img/hero.jpg se ve a la derecha; si no, queda el degradé durazno. */
+.hero {
+  background:
+    linear-gradient(90deg, var(--hero-vela) 0%, var(--hero-vela) 38%, transparent 78%),
+    url("img/hero.jpg") right center / cover no-repeat,
+    var(--hero-fondo);
+  padding: 4.5rem 0;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+}
+.hero .container { width: 100%; }
+.hero-contenido { max-width: 30rem; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bs-secondary-color);
+  margin-bottom: 1rem;
+}
+.eyebrow::after {
+  content: "";
+  width: 3.5rem;
+  height: 1px;
+  background: currentColor;
+}
+.hero-titulo {
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  line-height: 1.02;
+  margin-bottom: 1rem;
+}
+.hero-texto {
+  font-size: 1rem;
+  max-width: 28rem;
+  margin-bottom: 1.75rem;
+}
+.btn-hero { padding: 0.7rem 1.6rem; }
+
+/* ---------- Beneficios ---------- */
+.beneficios {
+  background-color: var(--bs-tertiary-bg);
+  padding: 2.25rem 0;
+}
+.beneficio-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border: 1px solid var(--rosa);
+  border-radius: 50%;
+  color: var(--rosa);
+  font-size: 1.35rem;
+  margin-bottom: 0.6rem;
+}
+.beneficio-titulo {
+  font-size: 1.2rem;
+  margin-bottom: 0.15rem;
+}
+.beneficio p {
+  font-size: 0.8rem;
+  color: var(--bs-secondary-color);
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .beneficio + .beneficio { border-left: 1px solid var(--bs-border-color); }
+}
+
+/* ---------- Catálogo ---------- */
+.eyebrow-seccion {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rosa);
+}
+.titulo-seccion { font-size: clamp(1.8rem, 4vw, 2.3rem); }
+
+.barra-filtros {
+  background-color: var(--superficie);
+  border-radius: 1rem;
+  padding: 1rem 0.5rem 1.1rem;
+}
+.form-select,
+.form-control { border-radius: 0.75rem; }
+.form-check-input:checked {
+  background-color: var(--rosa);
+  border-color: var(--rosa);
+}
+
+/* ---------- Cards de producto ---------- */
+.card-producto {
+  background-color: var(--superficie);
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  height: 100%;
+  box-shadow: 0 6px 18px rgba(80, 40, 30, 0.08) !important;
+  transition: box-shadow 0.2s ease;
+}
+.card-producto:hover { box-shadow: 0 10px 24px rgba(80, 40, 30, 0.16) !important; }
+
+.card-producto .card-img-top {
+  display: block;
+  width: calc(100% - 1.2rem);
+  height: 190px;
+  margin: 0.6rem 0.6rem 0;
+  object-fit: cover;
+  border-radius: 0.8rem;
+  background: var(--durazno);
+  color: var(--bs-secondary-color);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.card-producto .card-body { padding: 0.9rem 1rem 1rem; }
+.card-producto .card-title {
+  font-family: var(--fuente-texto);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.card-producto .badge {
+  background-color: var(--durazno) !important;
+  color: var(--rosa) !important;
+  font-weight: 500;
+  border-radius: 999px;
+}
+
+.card-precio {
+  font-family: var(--fuente-texto);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--bs-body-color);
+}
+
+.btn-favorito {
+  color: var(--bs-secondary-color);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.btn-favorito:hover { color: #e0245e; }
+.btn-favorito.active {
+  color: #e0245e;
+  transform: scale(1.12);
+}
+
+/* Botón "Agregar" de la card: durazno como en la referencia */
+.card-producto .btn-reposteria {
+  background-color: var(--durazno);
+  border-color: var(--durazno);
+  color: var(--bs-body-color);
+  font-size: 0.85rem;
+}
+.card-producto .btn-reposteria:hover,
+.card-producto .btn-reposteria:focus-visible {
+  background-color: var(--durazno-hover);
+  border-color: var(--durazno-hover);
+  color: var(--bs-body-color);
+}
+
+/* Etiqueta flotante sobre la imagen */
+.etiqueta-card {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  z-index: 2;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+}
+
+/* ---------- Offcanvas y modal ---------- */
+.offcanvas-header,
+.modal-header { border-bottom: 1px solid var(--bs-border-color); }
+.offcanvas-title,
+.modal-title { font-size: 1.5rem; }
+.resumen-carrito { border-top: 1px solid var(--bs-border-color); }
+.modal-content { border-radius: 1rem; }
+
+/* ---------- Items del carrito ---------- */
+.item-carrito {
+  border-bottom: 1px solid var(--bs-border-color);
+  padding: 0.75rem 0;
+}
+.item-carrito:last-child { border-bottom: none; }
+.item-carrito img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 0.6rem;
+  background: var(--durazno);
+}
+.cantidad-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.cantidad-control .btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* ---------- Carrito vacío ---------- */
+.carrito-vacio {
+  text-align: center;
+  color: var(--bs-secondary-color);
+  padding: 2rem 0;
+}
+
+/* ---------- Toast ---------- */
+.toast { border-radius: 0.75rem; }
+
+/* ---------- Footer ---------- */
+footer {
+  background-color: var(--bs-tertiary-bg);
+  color: var(--bs-secondary-color);
+}
+
+/* ---------- Accesibilidad: menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ============ ESTILOS MEJORADOS PARA EL MODAL DE CHECKOUT ============ */
+.modal-checkout-custom {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.header-checkout {
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+.icon-checkout-box {
+  width: 45px;
+  height: 45px;
+  background-color: rgba(214, 51, 132, 0.1);
+  color: var(--rosa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.form-seccion-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--rosa);
+  border-bottom: 2px solid rgba(214, 51, 132, 0.15);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+/* Campos de texto estilizados */
+.custom-input-icon {
+  background-color: transparent;
+  border-right: none;
+  color: var(--rosa);
+}
+
+.input-custom {
+  border-left: none;
+  font-size: 0.95rem;
+}
+
+.input-custom:focus {
+  box-shadow: none;
+  border-color: #dee2e6;
+}
+
+.input-group:focus-within .custom-input-icon,
+.input-group:focus-within .input-custom {
+  border-color: var(--rosa);
+}
+
+/* Tarjetas selectoras de tipo de entrega */
+.tarjeta-opcion {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: var(--bs-body-bg);
+}
+
+.tarjeta-opcion:hover {
+  border-color: var(--rosa) !important;
+  background-color: rgba(214, 51, 132, 0.03);
+}
+
+.tarjeta-opcion:has(input:checked) {
+  border-color: var(--rosa) !important;
+  border-width: 2px !important;
+  background-color: rgba(214, 51, 132, 0.05);
+}
+
+.text-reposteria {
+  color: var(--rosa);
+}
+
+.fs-xs {
+  font-size: 0.78rem;
+}
