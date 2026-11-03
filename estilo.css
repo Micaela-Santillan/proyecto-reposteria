@@ -104,12 +104,6 @@ h1, h2, .navbar-brand, .offcanvas-title {
 }
 .brand-nombre { font-size: 1.6rem; }
 .brand-nombre i { color: var(--rosa); font-size: 1.1rem; }
-.brand-lema {
-  font-family: var(--fuente-texto);
-  font-size: 0.68rem;
-  color: var(--bs-secondary-color);
-  letter-spacing: 0.04em;
-}
 .menu-principal { gap: 2rem; }
 .menu-principal a {
   color: var(--bs-body-color);
@@ -210,10 +204,6 @@ h1, h2, .navbar-brand, .offcanvas-title {
 }
 .form-select,
 .form-control { border-radius: 0.75rem; }
-.form-check-input:checked {
-  background-color: var(--rosa);
-  border-color: var(--rosa);
-}
 
 /* ---------- Cards de producto ---------- */
 .card-producto {
