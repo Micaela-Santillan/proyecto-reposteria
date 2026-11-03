@@ -5,29 +5,17 @@ const sinResultados       = document.querySelector("#sinResultados");
 const listaCarrito        = document.querySelector("#listaCarrito");
 const totalCarrito        = document.querySelector("#totalCarrito");
 const contadorCarrito     = document.querySelector("#contadorCarrito");
-const contadorFavoritos   = document.querySelector("#contadorFavoritos");
 const filtroCategoria     = document.querySelector("#filtroCategoria");
-const soloFavoritos       = document.querySelector("#soloFavoritos");
-const btnFavoritos        = document.querySelector("#btnFavoritos");
 const btnTema             = document.querySelector("#btnTema");
 const btnVaciar           = document.querySelector("#btnVaciar");
-const btnFinalizar        = document.querySelector("#btnFinalizar");
-const formCheckout        = document.querySelector("#formCheckout");
 const toastContainer      = document.querySelector("#toastContainer");
-const carritoOffcanvas    = document.querySelector("#carritoOffcanvas");
-const checkoutModal       = document.querySelector("#checkoutModal");
-const campoDireccion      = document.querySelector("#campoDireccion");
-const inputDireccion      = document.querySelector("#inputDireccion");
-
 
 // ============ ESTADO DE LA APLICACIÓN Y PERSISTENCIA ============
 
 let carrito   = [];
-let favoritos = new Set();
 
 const STORAGE = {
   CARRITO:   "reposteria_carrito",
-  FAVORITOS: "reposteria_favoritos",
   TEMA:      "reposteria_tema"
 };
 
@@ -43,18 +31,6 @@ function guardarCarrito() {
   localStorage.setItem(STORAGE.CARRITO, JSON.stringify(carrito));
 }
 
-function cargarFavoritos() {
-  try {
-    const datos = JSON.parse(localStorage.getItem(STORAGE.FAVORITOS));
-    favoritos = new Set(Array.isArray(datos) ? datos : []);
-  } catch {
-    favoritos = new Set();
-  }
-}
-function guardarFavoritos() {
-  localStorage.setItem(STORAGE.FAVORITOS, JSON.stringify([...favoritos]));
-}
-
 function formatoPrecio(numero) {
   return "$" + numero.toLocaleString("es-AR");
 }
@@ -63,7 +39,6 @@ function formatoPrecio(numero) {
 // ============ RENDER DEL CATÁLOGO (map y template strings) ============
 
 function cardProducto(p) {
-  const esFavorito = favoritos.has(p.id);
   const etiquetaHTML = p.etiqueta
     ? `<span class="etiqueta-card">${p.etiqueta}</span>`
     : "";
@@ -79,10 +54,6 @@ function cardProducto(p) {
         <p class="card-text small text-muted flex-grow-1">${p.descripcion}</p>
         <div class="d-flex justify-content-between align-items-center mt-2">
           <span class="card-precio">${formatoPrecio(p.precio)}</span>
-          <button class="btn btn-favorito border-0 fs-5 ${esFavorito ? "active" : ""}"
-                  data-action="favorito" data-id="${p.id}" title="Favorito" aria-label="Favorito">
-            <i class="bi ${esFavorito ? "bi-heart-fill" : "bi-heart"}"></i>
-          </button>
         </div>
         <button class="btn btn-reposteria w-100 mt-2" data-action="agregar" data-id="${p.id}">
           <i class="bi bi-cart-plus"></i> Agregar al Pedido
@@ -92,15 +63,10 @@ function cardProducto(p) {
   </div>`;
 }
 
-// Filtra por categoría y favoritos
+// Filtra por categoría
 function renderProductos() {
   const cat = filtroCategoria.value;
-
-  const lista = productos.filter((p) => {
-    const coincideCat = !cat || p.categoria === cat;
-    const coincideFav = !soloFavoritos.checked || favoritos.has(p.id);
-    return coincideCat && coincideFav;
-  });
+  const lista = productos.filter((p) => !cat || p.categoria === cat);
 
   contenedorProductos.innerHTML = lista.map(cardProducto).join("");
   sinResultados.classList.toggle("d-none", lista.length > 0);
@@ -227,37 +193,9 @@ function actualizarBadges() {
   contadorCarrito.textContent = totalItems;
   contadorCarrito.classList.toggle("d-none", totalItems === 0);
 
-  contadorFavoritos.textContent = favoritos.size;
-  contadorFavoritos.classList.toggle("d-none", favoritos.size === 0);
 }
-
-
-// ============ FAVORITOS ============
-
-function toggleFavorito(id) {
-  const producto = productos.find((p) => p.id === id);
-  if (!producto) return;
-
-  if (favoritos.has(id)) {
-    favoritos.delete(id);
-    mostrarToast(`<strong>${producto.nombre}</strong> quitado de favoritos.`, "error");
-  } else {
-    favoritos.add(id);
-    mostrarToast(`<strong>${producto.nombre}</strong> agregado a favoritos.`);
-  }
-
-  guardarFavoritos();
-  renderProductos();
-  actualizarBadges();
-}
-
 
 // ============ NOTIFICACIONES Y MODO OSCURO ============
-function escaparHTML (texto){
-  const div= document.createElement("div");
-  div.textContent=texto;
-  return div.innerHTML;} 
-
 function mostrarToast(mensaje, tipo = "exito") {
   const el = document.createElement("div");
   el.className = `toast align-items-center text-bg-${tipo === "error" ? "danger" : "success"} border-0`;
@@ -296,7 +234,6 @@ contenedorProductos.addEventListener("click", (e) => {
   const accion = boton.dataset.action;
 
   if (accion === "agregar") agregarAlCarrito(id);
-  if (accion === "favorito") toggleFavorito(id);
 });
 
 listaCarrito.addEventListener("click", (e) => {
@@ -311,13 +248,6 @@ listaCarrito.addEventListener("click", (e) => {
 });
 
 filtroCategoria.addEventListener("change", renderProductos);
-soloFavoritos.addEventListener("change", renderProductos);
-
-btnFavoritos.addEventListener("click", () => {
-  soloFavoritos.checked = !soloFavoritos.checked;
-  renderProductos();
-  document.querySelector("#catalogo").scrollIntoView({ behavior: "smooth" });
-});
 
 btnTema.addEventListener("click", () => {
   const actual = document.documentElement.getAttribute("data-bs-theme");
@@ -326,52 +256,9 @@ btnTema.addEventListener("click", () => {
 
 btnVaciar.addEventListener("click", vaciarCarrito);
 
-btnFinalizar.addEventListener("click", () => {
-  if (carrito.length === 0) {
-    mostrarToast("El pedido está vacío.", "error");
-    return;
-  }
-  bootstrap.Offcanvas.getOrCreateInstance(carritoOffcanvas).hide();
-  bootstrap.Modal.getOrCreateInstance(checkoutModal).show();
-});
-
-document.querySelectorAll('input[name="entrega"]').forEach((radio) => {
-  radio.addEventListener("change", () => {
-    const esDomicilio = document.querySelector("#entregaDomicilio").checked;
-    campoDireccion.style.display = esDomicilio ? "block" : "none";
-    inputDireccion.required = esDomicilio;
-  });
-});
-
-formCheckout.addEventListener("submit", (e) => {
-  e.preventDefault();
-  formCheckout.classList.add("was-validated");
-
-  if (!formCheckout.checkValidity()) {
-    mostrarToast("Completá correctamente todos los campos.", "error");
-    return;
-  }
-
-  const nombre = document.querySelector("#inputNombre").value.trim();
-
-  carrito = [];
-  guardarCarrito();
-  renderCarrito();
-
-  bootstrap.Modal.getOrCreateInstance(checkoutModal).hide();
-  formCheckout.reset();
-  formCheckout.classList.remove("was-validated");
-  campoDireccion.style.display = "none";
-
-  mostrarToast(`¡Gracias ${escaparHTML(nombre)}! Tu pedido de Dulce Tentación fue confirmado.`);
-});
-
-
 // ============ INICIALIZACIÓN ============
-
 function init() {
   cargarCarrito();
-  cargarFavoritos();
   cargarTema();
   cargarCategorias();
   renderProductos();

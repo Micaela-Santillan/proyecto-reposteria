@@ -32,16 +32,12 @@
       </div>
 
       <div class="d-flex align-items-center gap-2">
-        <!-- Botón de Tema Oscuro/Claro -->
+        <!-- Boton de Tema Oscuro/Claro -->
         <button id="btnTema" class="btn btn-icono rounded-circle" title="Cambiar tema" aria-label="Cambiar tema">
           <i class="bi bi-moon-stars"></i>
         </button>
-        <!-- Botón de Favoritos con badge -->
-        <button id="btnFavoritos" class="btn btn-icono position-relative" title="Ver favoritos" aria-label="Ver favoritos">
-          <i class="bi bi-heart-fill text-danger"></i>
-          <span id="contadorFavoritos" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
-        </button>
-        <!-- Botón de Carrito Offcanvas con badge -->
+       
+        <!-- Boton de Carrito Offcanvas con badge -->
         <button class="btn btn-reposteria position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#carritoOffcanvas" aria-controls="carritoOffcanvas">
           <i class="bi bi-bag-fill"></i> Pedido
           <span id="contadorCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark d-none">0</span>
@@ -106,12 +102,6 @@
           <option value="">Todas las categorías</option>
         </select>
       </div>
-      <div class="col-md-5 d-flex align-items-end">
-        <div class="form-check form-switch mb-1">
-          <input class="form-check-input" type="checkbox" role="switch" id="soloFavoritos">
-          <label class="form-check-label fw-semibold small" for="soloFavoritos">Mostrar solo favoritos ❤️</label>
-        </div>
-      </div>
     </div>
 
     <!-- Contenedor dinámico de Productos (Generado con JS) -->
@@ -147,123 +137,16 @@
           <span id="totalCarrito" class="text-reposteria">$0</span>
         </div>
         <div class="d-grid gap-2">
-          <button id="btnFinalizar" class="btn btn-reposteria btn-lg">Finalizar pedido</button>
           <button id="btnVaciar" class="btn btn-outline-danger btn-sm">Vaciar carrito</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ============ MODAL DE CHECKOUT / FORMULARIO ============ -->
-<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content modal-checkout-custom border-0 shadow-lg">
-      
-      <!-- Encabezado con degradado suave -->
-      <div class="modal-header header-checkout border-0 pb-0">
-        <div class="d-flex align-items-center gap-2">
-          <div class="icon-checkout-box rounded-circle">
-            <i class="bi bi-bag-check-fill"></i>
-          </div>
-          <div>
-            <h5 class="modal-title fw-bold mb-0" id="checkoutModalLabel">Finalizar Pedido</h5>
-            <small class="text-muted">Completá los datos para coordinar la entrega</small>
-          </div>
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-
-      <div class="modal-body p-4">
-        <form id="formCheckout" novalidate>
-          <div class="row g-4">
-            
-            <!-- Columna Izquierda: Datos personales -->
-            <div class="col-md-6">
-              <h6 class="form-seccion-titulo"><i class="bi bi-person-heart me-1"></i> Datos Personales</h6>
-              
-              <div class="mb-3">
-                <label for="inputNombre" class="form-label small fw-semibold">Nombre y Apellido</label>
-                <div class="input-group">
-                  <span class="input-group-text custom-input-icon"><i class="bi bi-person"></i></span>
-                  <input type="text" class="form-control input-custom" id="inputNombre" placeholder="Ej: María García" required>
-                  <div class="invalid-feedback">Por favor ingresá tu nombre.</div>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="inputTelefono" class="form-label small fw-semibold">Teléfono / WhatsApp</label>
-                <div class="input-group">
-                  <span class="input-group-text custom-input-icon"><i class="bi bi-whatsapp"></i></span>
-                  <input type="tel" class="form-control input-custom" id="inputTelefono" placeholder="Ej: 3865221193" required>
-                  <div class="invalid-feedback">Por favor ingresá un teléfono válido.</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Columna Derecha: Método de Entrega -->
-            <div class="col-md-6">
-              <h6 class="form-seccion-titulo"><i class="bi bi-geo-alt-fill me-1"></i> Formato de Entrega</h6>
-              
-              <!-- Opciones de tarjeta tipo Radio -->
-              <div class="opciones-entrega d-grid gap-2 mb-3">
-                
-                <label class="tarjeta-opcion d-flex align-items-center p-3 rounded border">
-                  <input class="form-check-input me-3" type="radio" name="entrega" id="entregaRetiro" value="retiro" checked>
-                  <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-shop fs-4 text-reposteria"></i>
-                    <div>
-                      <strong class="d-block">Retiro en local</strong>
-                      <small class="text-muted d-block fs-xs">Calle Venezuela 560, Juan B. Alberdi</small>
-                    </div>
-                  </div>
-                </label>
-
-                <label class="tarjeta-opcion d-flex align-items-center p-3 rounded border">
-                  <input class="form-check-input me-3" type="radio" name="entrega" id="entregaDomicilio" value="domicilio">
-                  <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-truck fs-4 text-reposteria"></i>
-                    <div>
-                      <strong class="d-block">Envío a domicilio</strong>
-                      <small class="text-muted d-block fs-xs">Lo llevamos hasta tu puerta</small>
-                    </div>
-                  </div>
-                </label>
-
-              </div>
-
-              <!-- Campo de Dirección Animado/Desplegable -->
-              <div class="mb-3" id="campoDireccion" style="display: none;">
-                <label for="inputDireccion" class="form-label small fw-semibold">Dirección de entrega</label>
-                <div class="input-group">
-                  <span class="input-group-text custom-input-icon"><i class="bi bi-house-door"></i></span>
-                  <input type="text" class="form-control input-custom" id="inputDireccion" placeholder="Calle, número, barrio...">
-                  <div class="invalid-feedback">Por favor ingresá tu dirección.</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <hr class="my-4 opacity-10">
-
-          <!-- Botón de acción principal -->
-          <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-reposteria btn-lg px-4 fs-6 fw-bold">
-              <i class="bi bi-whatsapp me-2"></i> Confirmar y enviar pedido
-            </button>
-          </div>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-
   <!-- ============ CONTENEDOR DE TOASTS (Notificaciones) ============ -->
   <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
 
-  <!-- ============ FOOTER ============ -->
+  <!------- FOOTER ------->
   <footer id="contacto" class="text-center py-4 small">
     <div class="container">
       <p class="mb-0">Telefono: 3865 - 221193</p>
@@ -271,7 +154,6 @@
         <p class="mb-0"> Direccion: Barrio 12 de octubre, calle Venezuela 560 - Juan B. Alberdi
         </p>
         
-
     </div>
   </footer>
 

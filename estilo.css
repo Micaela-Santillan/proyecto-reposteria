@@ -44,7 +44,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, .navbar-brand, .offcanvas-title, .modal-title {
+h1, h2, .navbar-brand, .offcanvas-title {
   font-family: var(--fuente-titulo);
   font-weight: 700;
 }
@@ -53,8 +53,6 @@ h1, h2, .navbar-brand, .offcanvas-title, .modal-title {
   outline: 3px solid var(--rosa);
   outline-offset: 2px;
 }
-
-
 
 /* ---------- Botones ---------- */
 .btn { font-family: var(--fuente-texto); }
@@ -263,16 +261,6 @@ h1, h2, .navbar-brand, .offcanvas-title, .modal-title {
   color: var(--bs-body-color);
 }
 
-.btn-favorito {
-  color: var(--bs-secondary-color);
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-.btn-favorito:hover { color: #e0245e; }
-.btn-favorito.active {
-  color: #e0245e;
-  transform: scale(1.12);
-}
-
 /* Botón "Agregar" de la card: durazno como en la referencia */
 .card-producto .btn-reposteria {
   background-color: var(--durazno);
@@ -301,13 +289,10 @@ h1, h2, .navbar-brand, .offcanvas-title, .modal-title {
   border-radius: 999px;
 }
 
-/* ---------- Offcanvas y modal ---------- */
-.offcanvas-header,
-.modal-header { border-bottom: 1px solid var(--bs-border-color); }
-.offcanvas-title,
-.modal-title { font-size: 1.5rem; }
+/* ---------- Offcanvas---------- */
+.offcanvas-header { border-bottom: 1px solid var(--bs-border-color); }
+.offcanvas-title { font-size: 1.5rem; }
 .resumen-carrito { border-top: 1px solid var(--bs-border-color); }
-.modal-content { border-radius: 1rem; }
 
 /* ---------- Items del carrito ---------- */
 .item-carrito {
@@ -358,81 +343,6 @@ footer {
   * { transition: none !important; }
 }
 
-/* ============ ESTILOS MEJORADOS PARA EL MODAL DE CHECKOUT ============ */
-.modal-checkout-custom {
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.header-checkout {
-  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
-}
-
-.icon-checkout-box {
-  width: 45px;
-  height: 45px;
-  background-color: rgba(214, 51, 132, 0.1);
-  color: var(--rosa);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-}
-
-.form-seccion-titulo {
-  font-family: var(--fuente-titulo);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--rosa);
-  border-bottom: 2px solid rgba(214, 51, 132, 0.15);
-  padding-bottom: 0.4rem;
-  margin-bottom: 1rem;
-}
-
-/* Campos de texto estilizados */
-.custom-input-icon {
-  background-color: transparent;
-  border-right: none;
-  color: var(--rosa);
-}
-
-.input-custom {
-  border-left: none;
-  font-size: 0.95rem;
-}
-
-.input-custom:focus {
-  box-shadow: none;
-  border-color: #dee2e6;
-}
-
-.input-group:focus-within .custom-input-icon,
-.input-group:focus-within .input-custom {
-  border-color: var(--rosa);
-}
-
-/* Tarjetas selectoras de tipo de entrega */
-.tarjeta-opcion {
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  background-color: var(--bs-body-bg);
-}
-
-.tarjeta-opcion:hover {
-  border-color: var(--rosa) !important;
-  background-color: rgba(214, 51, 132, 0.03);
-}
-
-.tarjeta-opcion:has(input:checked) {
-  border-color: var(--rosa) !important;
-  border-width: 2px !important;
-  background-color: rgba(214, 51, 132, 0.05);
-}
-
 .text-reposteria {
   color: var(--rosa);
-}
-
-.fs-xs {
-  font-size: 0.78rem;
 }
