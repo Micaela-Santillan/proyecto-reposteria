@@ -120,7 +120,6 @@ h1, h2, .navbar-brand, .offcanvas-title {
 .hero {
   background:
     linear-gradient(90deg, var(--hero-vela) 0%, var(--hero-vela) 38%, transparent 78%),
-    url("img/hero.jpg") right center / cover no-repeat,
     var(--hero-fondo);
   padding: 4.5rem 0;
   min-height: 340px;
@@ -157,36 +156,6 @@ h1, h2, .navbar-brand, .offcanvas-title {
   margin-bottom: 1.75rem;
 }
 .btn-hero { padding: 0.7rem 1.6rem; }
-
-/* ---------- Beneficios ---------- */
-.beneficios {
-  background-color: var(--bs-tertiary-bg);
-  padding: 2.25rem 0;
-}
-.beneficio-icono {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 3.4rem;
-  height: 3.4rem;
-  border: 1px solid var(--rosa);
-  border-radius: 50%;
-  color: var(--rosa);
-  font-size: 1.35rem;
-  margin-bottom: 0.6rem;
-}
-.beneficio-titulo {
-  font-size: 1.2rem;
-  margin-bottom: 0.15rem;
-}
-.beneficio p {
-  font-size: 0.8rem;
-  color: var(--bs-secondary-color);
-  margin: 0;
-}
-@media (min-width: 768px) {
-  .beneficio + .beneficio { border-left: 1px solid var(--bs-border-color); }
-}
 
 /* ---------- Catálogo ---------- */
 .eyebrow-seccion {
